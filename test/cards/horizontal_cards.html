@@ -4,14 +4,22 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="card_test.css">
+    <script type = "text/javascript" src="file://kor1062778/Users/mlg1kor/Documents/Movie/test/cards/FormHandler.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body style="width:70%; margin:15%;opacity:0.92;border-radius: 15px;">
-  <div class="row rounded mb-0" style="margin:auto;"><img class="icon" src="icon_bg.png"></div>
-  <div class="row rounded mb-0" style="margin:auto;">
+<body id ="body" style="width:70%; margin:15%;border-radius: 15px;opacity:0.9">
+  <div id = "icon" class="card img-fluid text-center">
+    <img class="card-img-top" style="width:100%;height:100px;" src="post_bg.jpeg">
+    <div class="card-body">
+      <div class="card-img-overlay">
+        <button type="button" onclick="AddPost()" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>New Post</button>
+      </div>
+    </div>
+  </div>
+  <div id = "movie" class="row rounded mb-0" style="margin:auto;">
     <div class="card border-0 mb-3">
       <div class="card-header text-center">
         Dark Waters - Posted by Leo Tolstoy
@@ -74,7 +82,7 @@
       </div>
     </div>
   </div>
-  <div class="row rounded mb-0" style="margin:auto;">
+  <div class="row rounded mb-0" style="margin:auto">
     <div class="card border-0 mb-3">
       <div class="card-header text-center">
         Dark Waters - Posted by Leo Tolstoy
