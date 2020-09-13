@@ -4,18 +4,19 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="card_test.css">
-    <script type = "text/javascript" src="file://kor1062778/Users/mlg1kor/Documents/Movie/test/cards/FormHandler.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type = "text/javascript" src="FormHandler.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body id ="body" style="width:70%; margin:15%;border-radius: 15px;opacity:0.9">
-  <div id = "icon" class="card img-fluid text-center">
+  <div id = "icon" class="card img-fluid text-center border-0 mb-0" style="margin:auto;">
     <img class="card-img-top" style="width:100%;height:100px;" src="post_bg.jpeg">
     <div class="card-body">
       <div class="card-img-overlay">
-        <button type="button" onclick="AddPost()" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>New Post</button>
+        <button type="button" onclick="AddPost()" class="btn btn-primary"><span><i class="fas fa-plus-square"></i>New Post</span></button>
       </div>
     </div>
   </div>
@@ -145,4 +146,129 @@
       </div>
     </div>
   </div>
-</body></html>
+  <form style="display:block;">
+  <div class="row rounded mb-0" style="margin:auto;">
+    <div class="card border-0 mb-3">
+      <div class="card-header text-center">
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-4">
+            <input class="form-control" id="MovieName" placeholder="Enter Movie Name">
+          </div>
+          <div class="col-sm-4">
+            <input class="form-control" id="UserName" placeholder="Enter User Name">
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-5">
+          <label for="UpImage">
+            <image src="blank_poster.jpg" class="card-img" id="NewPoster"/>
+          </label>
+          <input type="file" id="UpImage" onchange="upload()" style="visibility:hidden;">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="card  border-secondary" style="width: 100%;">
+                <div class="card-header text-center"> Review</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <textarea class="form-control" rows="5"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header text-center"> Genre</div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_doc">documentary</label>
+                      <input type="range" class="custom-range" id="r_doc">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_sci">sci-fi</label>
+                      <input type="range" class="custom-range" id="r_sci">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_mys">mystery</label>
+                      <input type="range" class="custom-range" id="r_mys">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_thr">thriller</label>
+                      <input type="range" class="custom-range" id="r_thr">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_act">action</label>
+                      <input type="range" class="custom-range" id="r_act">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_phi"> philosophical</label>
+                      <input type="range" class="custom-range" id="r_phi">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_com">comedy</label>
+                      <input type="range" class="custom-range" id="r_com">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_min">mind bending</label>
+                      <input type="range" class="custom-range" id="r_min">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_exp">experimental</label>
+                      <input type="range" class="custom-range" id="r_exp">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header text-center">links</div>
+                <div class="card-body text-center">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="torrent_link">Torrent link</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="torrent_link" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="dd_link">Direct link</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="dd_link" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="trailer_link">trailer</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="trailer_link" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t float-right">
+              <div class="btn-block float-right">
+                <button type="button" onclick="SubmitPost()" class="btn btn-primary"><span><i class="fas fa-plus-square"></i>Post</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted text-center">04/09/2020 9:00 pm</div>
+    </div>
+  </div>
+  </form>
+</body>
+</html>
