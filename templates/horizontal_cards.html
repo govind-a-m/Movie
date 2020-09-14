@@ -146,16 +146,16 @@
       </div>
     </div>
   </div>
-  <form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost()">
+  <form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost();">
   <div class="row rounded mb-0" style="margin:auto;">
     <div class="card border-0 mb-3">
       <div class="card-header text-center">
         <div class="form-group row justify-content-center">
           <div class="col-sm-4">
-            <input class="form-control" id="H_MovieName" placeholder="Enter Movie Name">
+            <input class="form-control" id="H_MovieName" name="MovieName" placeholder="Enter Movie Name">
           </div>
           <div class="col-sm-4">
-            <input class="form-control" id="H_UserName" placeholder="Enter User Name">
+            <input class="form-control" id="H_UserName" name="UserName" placeholder="Enter User Name">
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@
           <label for="UpImage">
             <image id="H_poster" src="/static/blank_poster.jpg" class="card-img" id="NewPoster"></image>
           </label>
-          <input type="file" id="UpImage" onchange="upload()" style="visibility:hidden;">
+          <input type="file" name="poster" id="UpImage" onchange="upload()" style="visibility:hidden;">
         </div>
         <div class="col-md-7">
           <div class="card-body pt-0">
@@ -185,43 +185,43 @@
                   <div class="form-row">
                     <div class="col-md-4">
                       <label for="r_doc">documentary</label>
-                      <input type="range" class="custom-range" id="r_doc">
+                      <input type="range" class="custom-range" name="r_doc" id="r_doc">
                     </div>
                     <div class="col-md-4">
                       <label for="r_sci">sci-fi</label>
-                      <input type="range" class="custom-range" id="r_sci">
+                      <input type="range" class="custom-range" name="r_sci" id="r_sci">
                     </div>
                     <div class="col-md-4">
                       <label for="r_mys">mystery</label>
-                      <input type="range" class="custom-range" id="r_mys">
+                      <input type="range" class="custom-range" name="r_mys" id="r_mys">
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-4">
                       <label for="r_thr">thriller</label>
-                      <input type="range" class="custom-range" id="r_thr">
+                      <input type="range" class="custom-range" name="r_thr" id="r_thr">
                     </div>
                     <div class="col-md-4">
                       <label for="r_act">action</label>
-                      <input type="range" class="custom-range" id="r_act">
+                      <input type="range" class="custom-range" name="r_act" id="r_act">
                     </div>
                     <div class="col-md-4">
                       <label for="r_phi"> philosophical</label>
-                      <input type="range" class="custom-range" id="r_phi">
+                      <input type="range" class="custom-range" name="r_phi" id="r_phi">
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="col-md-4">
                       <label for="r_com">comedy</label>
-                      <input type="range" class="custom-range" id="r_com">
+                      <input type="range" class="custom-range" name="r_com" id="r_com">
                     </div>
                     <div class="col-md-4">
                       <label for="r_min">mind bending</label>
-                      <input type="range" class="custom-range" id="r_min">
+                      <input type="range" class="custom-range" name="r_min" id="r_min">
                     </div>
                     <div class="col-md-4">
                       <label for="r_exp">experimental</label>
-                      <input type="range" class="custom-range" id="r_exp">
+                      <input type="range" class="custom-range" name="r_exp" id="r_exp">
                     </div>
                   </div>
                 </div>
@@ -241,7 +241,7 @@
                       <label for="H_torrent_link">Torrent link</label>
                     </div>
                     <div class="form-group col-md-9">
-                      <input id="H_torrent_link" class="form-control">
+                      <input id="H_torrent_link" name="torrent_link" class="form-control">
                     </div>
                   </div>
                   <div class="form-row">
@@ -249,7 +249,7 @@
                       <label for="H_dd_link">Direct link</label>
                     </div>
                     <div class="form-group col-md-9">
-                      <input id="H_dd_link" class="form-control">
+                      <input id="H_dd_link" name="dd_link" class="form-control">
                     </div>
                   </div>
                   <div class="form-row">
@@ -257,7 +257,7 @@
                       <label for="H_trailer_link">trailer</label>
                     </div>
                     <div class="form-group col-md-9">
-                      <input id="H_trailer_link" class="form-control">
+                      <input id="H_trailer_link" name="trailer_link" class="form-control">
                     </div>
                   </div>
                 </div>

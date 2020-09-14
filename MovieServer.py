@@ -6,7 +6,6 @@ app.secret_key = 'szPnSXYHxNkMKDUEE6FbYfCM'
 @app.route("/",methods=['GET','POST'])
 def home():
   if request.method == 'POST':
-    print(request.form)
     return jsonify(request.form.to_dict())
   else:
     return render_template('horizontal_cards.html')
