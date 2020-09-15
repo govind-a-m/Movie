@@ -6,7 +6,11 @@ class DB:
    self.conn = sqlite3.connect('MovieData.db')
    self.conn.row_factory = sqlite3.Row
    self.c = self.conn.cursor()
-
+ 
+ @property
+ def NofPosts(self):
+   self.c.execute("SELECT MAX(idx) FROM posts")
+   return self.c.fetchone()[0]
 
  def AddPost(self,movie):
    self.c.execute('INSERT INTO posts (time,author,poster,review,tlink,trailer,dd_link,'

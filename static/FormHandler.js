@@ -3,7 +3,7 @@ var form;
 function AddPost()
 {
     var body = document.getElementById("body")
-    cloneForm = body.insertBefore(document.getElementById("HiddenPostForm").cloneNode(true),document.getElementById("Movie_1"));
+    cloneForm = body.insertBefore(document.getElementById("HiddenPostForm").cloneNode(true),body.firstElementChild.nextSibling);
     cloneForm.id = "NewPostForm";
     cloneForm.style.display = "block";
     cloneForm.querySelector("#H_MovieName").id = "MovieName";
