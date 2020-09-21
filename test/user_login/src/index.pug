@@ -1,0 +1,25 @@
+body#gradient(ontouchstart="")
+  form(action="")
+    img.header-img(src="https://img.icons8.com/windows/96/17ed9f/smile-beam.png", alt="login")
+    h1 Login Page
+    label(for="username") username:
+    .input-container
+      img(src="https://img.icons8.com/android/24/953ae5/user.png", alt="user icon" for="username")
+      input(id="username" name="username" type="text" placeholder="username")
+    label(for="password") password:
+    .input-container
+      img(src="https://img.icons8.com/ios-filled/50/953ae5/lock.png", alt="password icon" for="password")
+      input(id="password" name="password" type="password" placeholder="password")
+    .buttons-container
+      button#btn-reset(type="button") reset
+      button#btn-login(type="button") login                
+  #modal.modal
+    #modal-content.modal-content
+      h2#modal-message no content was entered!
+      button#btn-close-modal(type="button") close
+  #welcome-container.welcome-container
+    section#welcome.welcome
+      h1#user-welcome Welcome, User.
+      button(type="button")#btn-logout logout
+
+script(defer src='app.js')

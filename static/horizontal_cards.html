@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="card_test_offline.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="FormHandler.js"></script>
+</head>
+<body id ="body" class = "body_bgd" style="width:70%; margin: 0% 15%; border-radius: 15px;opacity:0.9">
+  <div id = "icon" class="card img-fluid text-center border-0 mb-0" style="margin:auto;">
+    <img class="card-img-top" style="width:100%;height:100px;" src="post_bg.jpeg">
+    <div class="card-body">
+      <div class="card-img-overlay">
+        <button type="button" onclick="AddPost()" class="btn btn-primary"><span><i class="fas fa-plus-square"></i>New Post</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="row rounded mb-0" id = "Movie_1" style="margin:auto;">
+    <div class="card body_bgd border-0 mb-3">
+      <div class="card-header header_bgd  text-center">
+        Dark Waters - Posted by Leo Tolstoy
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-5">
+          <img src="image.jpg" class="card-img" alt="poster">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Review</div>
+                <div class="card-body">
+                  <p class="card-text">
+                    you think morality is how world works , economics is how it actually works.
+                  </p>
+                  <p class="card-text">
+                    Great Movie about how big corporations control governments:Capitalism
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header text-center"> Genre</div>
+                <div class="card-body">
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#4d004d;">documentary</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00cc66;">Sci-fi</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#a3c2c2;">mystery</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#adad85;">thriller</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#660022;">action</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff7733;">Philosophical</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#b3b300;">Comedy</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff4dff;">Mind Bending</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00b3b3;">Experimental</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 15%;background-color:#4d004d;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center">links</div>
+                <div class="card-body text-center">
+                  <a href="#" class="card-link">trailer</a>
+                  <a href="#" class="card-link">direct download</a>
+                  <a href="#" class="card-link">torrent link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted text-center">
+        04/09/2020 9:00 pm
+        <button type="button" onmouseover="highlight(this)" belongsto="Movie_1" class="btn btn-outline-danger btn-sm float-right"><i class="fa fas fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="row rounded mb-0" id = "Movie_2" style="margin:auto">
+    <div class="card border-0 mb-3">
+      <div class="card-header header_bgd text-center">
+        Dark Waters - Posted by Leo Tolstoy
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-5">
+          <img src="image.jpg" class="card-img" alt="poster">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="card  border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Review</div>
+                <div class="card-body">
+                  <p class="card-text">
+                    you think morality is how world works , economics is how it actually works.
+                  </p>
+                  <p class="card-text">
+                    Great Movie about how big corporations control governments:Capitalism
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Genre</div>
+                <div class="card-body">
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#4d004d;">documentary</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00cc66;">Sci-fi</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#a3c2c2;">mystery</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#adad85;">thriller</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#660022;">action</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff7733;">Philosophical</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#b3b300;">Comedy</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff4dff;">Mind Bending</span>
+                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00b3b3;">Experimental</span>
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 15%;background-color:#4d004d;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center">links</div>
+                <div class="card-body text-center">
+                  <a href="#" class="card-link">trailer</a>
+                  <a href="#" class="card-link">direct download</a>
+                  <a href="#" class="card-link">torrent link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted text-center">
+        04/09/2020 9:00 pm
+      </div>
+    </div>
+  </div>
+  <form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost();">
+  <div class="row rounded mb-0" style="margin:auto;">
+    <div class="card border-0 mb-3">
+      <div class="card-header header_bgd text-center">
+        <div class="form-group row justify-content-center">
+          <div class="col-sm-4">
+            <input class="form-control" id="H_MovieName" name="MovieName" placeholder="Enter Movie Name">
+          </div>
+          <div class="col-sm-4">
+            <input class="form-control" id="H_UserName" name="UserName" placeholder="Enter User Name">
+          </div>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-md-5">
+          <label for="UpImage">
+            <image id="H_poster" src="blank_poster.jpg" class="card-img" id="NewPoster"></image>
+          </label>
+          <input type="file" name="poster" id="UpImage" onchange="upload()" style="visibility:hidden;">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="card  border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Review</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <textarea id="H_review" class="form-control" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-m-t">
+              <div class="card border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Genre</div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_doc">documentary</label>
+                      <input type="range" class="custom-range" name="r_doc" id="r_doc">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_sci">sci-fi</label>
+                      <input type="range" class="custom-range" name="r_sci" id="r_sci">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_mys">mystery</label>
+                      <input type="range" class="custom-range" name="r_mys" id="r_mys">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_thr">thriller</label>
+                      <input type="range" class="custom-range" name="r_thr" id="r_thr">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_act">action</label>
+                      <input type="range" class="custom-range" name="r_act" id="r_act">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_phi"> philosophical</label>
+                      <input type="range" class="custom-range" name="r_phi" id="r_phi">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="r_com">comedy</label>
+                      <input type="range" class="custom-range" name="r_com" id="r_com">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_min">mind bending</label>
+                      <input type="range" class="custom-range" name="r_min" id="r_min">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="r_exp">experimental</label>
+                      <input type="range" class="custom-range" name="r_exp" id="r_exp">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-0 mx-0 by-0 no-gutters">
+        <div class="col-md-12">
+          <div class="row row-m-t mx-0 my-0 border-bottom-0">
+              <div class="card border-secondary border-bottom-0" style="width: 100%;">
+                <div class="card-header header_bgd text-center">links</div>
+                <div class="card-body text-center pb-0">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="H_torrent_link">Torrent link</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="H_torrent_link" name="torrent_link" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="H_dd_link">Direct link</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="H_dd_link" name="dd_link" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="H_trailer_link">trailer</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                      <input id="H_trailer_link" name="trailer_link" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row row-m-t mx-0 my-0 by-0">
+            <div id="H_alert" class="col-md-11 my-0  alert alert-danger float-left border-bottom-0 py-0" role="alert" style="visibility:hidden;">This is a danger alert—check it out!</div>
+            <div class="col-md-1 my-0 mx-0 px-0 btn-block">
+                <input type="submit" id ="H_submit" style="width:100%;"  class="btn btn-primary" value="Post"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted text-center">04/09/2020 9:00 pm</div>
+    </div>
+  </div>
+  </form>
+</body>
+</html>

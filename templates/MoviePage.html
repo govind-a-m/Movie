@@ -7,86 +7,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type = "text/javascript" src="/static/FormHandler.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body id ="body" style="width:70%; margin:15%;border-radius: 15px;opacity:0.9">
-	<div id = "icon" class="card img-fluid text-center border-0 mb-0" style="margin:auto;">
-    <img class="card-img-top" style="width:100%;height:100px;" src="/static/post_bg.jpeg">
-    <div class="card-body">
-      <div class="card-img-overlay">
-        <button type="button" onclick="AddPost()" class="btn btn-primary"><span><i class="fas fa-plus-square"></i>New Post</span></button>
-      </div>
+<body id ="body" class="body_bgd" style="width:70%; margin:0% 15%;border-radius: 15px;opacity:0.9">
+	<div id = "icon" class="card header_bgd text-center border-3 mb-0" style="margin:auto;">
+		<div class="card-body">
+			<button type="button" onclick="AddPost()" class="btn btn-primary"><i class="fa fas fa-plus-square"></i></button>
+		</div>
     </div>
-	</div>
 	{% for mv in movies %}
-	<div class="row rounded mb-0" id = "{{ mv.idx }}" style="margin:auto;">
-    <div class="card border-0 mb-3">
-      <div class="card-header text-center">
+	<div class="row rounded mb-0 body_bgd" id = "{{ mv.idx }}" style="margin:auto;">
+    <div class="card border-0 mb-3 body_bgd" id="card_{{mv.idx}}" movie_name={{ mv.name }} movie_id={{ mv.idx }}>
+      <div class="card-header header_bgd text-center">
         {{ mv.name }} - Posted by {{ mv.author }}
       </div>
       <div class="row no-gutters">
         <div class="col-md-5">
-          <img src={{ mv.poster }} class="card-img" alt="poster">
+          <img src= {{ mv.poster }} class="card-img" alt="poster">
         </div>
         <div class="col-md-7">
           <div class="card-body pt-0">
             <div class="row">
-              <div class="card  border-secondary" style="width: 100%;">
-                <div class="card-header text-center"> Review</div>
-                <div class="card-body">
-									{{ mv.review }}
-                </div>
+              <div class="card  body_bgd border-secondary" style="width: 100%;">
+                <div class="card-header header_bgd text-center"> Review</div>
+                <div class="card-body grey_font" >{{ mv.review }}</div>
               </div>
             </div>
             <div class="row row-m-t">
-              <div class="card border-secondary" style="width: 100%;">
-                <div class="card-header text-center"> Genre</div>
-                <div class="card-body">
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#4d004d;">documentary</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00cc66;">Sci-fi</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#a3c2c2;">mystery</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#adad85;">thriller</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#660022;">action</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff7733;">Philosophical</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#b3b300;">Comedy</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#ff4dff;">Mind Bending</span>
-                  <span class="badge badge-pill" style="color:#ffffff;background-color:#00b3b3;">Experimental</span>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_docu'] }}%; background-color:#4d004d;" aria-valuenow="{{ mv.genre['r_docu'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_sci'] }}%; background-color:#00cc66;" aria-valuenow="{{ mv.genre['r_sci'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-                    <div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_mys'] }}%; background-color:#a3c2c2;" aria-valuenow="{{ mv.genre['r_mys'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_thi'] }}%; background-color:#adad85;" aria-valuenow="{{ mv.genre['r_thi'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_act'] }}%; background-color:#660022;" aria-valuenow="{{ mv.genre['r_act'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_phi'] }}%; background-color:#ff7733;" aria-valuenow="{{ mv.genre['r_phi'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_com'] }}%; background-color:#b3b300;" aria-valuenow="{{ mv.genre['r_com'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_min'] }}%; background-color:#ff4dff;" aria-valuenow="{{ mv.genre['r_min'] }}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_exp'] }}%; background-color:#00b3b3;" aria-valuenow="{{ mv.genre['r_exp'] }}" aria-valuemin="0" aria-valuemax="100"></div>										
-									</div>
-                </div>
-              </div>
+				<div class="card body_bgd border-secondary" style="width: 100%;">
+					<div class="card-header header_bgd text-center"> Genre</div>
+					<div class="card-body">
+					<span class="badge badge-pill" style="color:#ffffff;background-color:#4d004d;">documentary</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#00cc66;">Sci-fi</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#a3c2c2;">mystery</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#adad85;">thriller</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#660022;">action</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#ff7733;">Philosophical</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#b3b300;">Comedy</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#ff4dff;">Mind Bending</span>
+                  	<span class="badge badge-pill" style="color:#ffffff;background-color:#00b3b3;">Experimental</span>
+                  	<div class="progress">
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_doc'] }}%; background-color:#4d004d;" aria-valuenow="{{ mv.genre['r_doc'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_sci'] }}%; background-color:#00cc66;" aria-valuenow="{{ mv.genre['r_sci'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_mys'] }}%; background-color:#a3c2c2;" aria-valuenow="{{ mv.genre['r_mys'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_thi'] }}%; background-color:#adad85;" aria-valuenow="{{ mv.genre['r_thi'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_act'] }}%; background-color:#660022;" aria-valuenow="{{ mv.genre['r_act'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_phi'] }}%; background-color:#ff7733;" aria-valuenow="{{ mv.genre['r_phi'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_com'] }}%; background-color:#b3b300;" aria-valuenow="{{ mv.genre['r_com'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_min'] }}%; background-color:#ff4dff;" aria-valuenow="{{ mv.genre['r_min'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress-bar" role="progressbar" style="width: {{ mv.genre['r_exp'] }}%; background-color:#00b3b3;" aria-valuenow="{{ mv.genre['r_exp'] }}" aria-valuemin="0" aria-valuemax="100"></div>										
+				  	</div>
+                	</div>
+              	</div>
             </div>
             <div class="row row-m-t">
-              <div class="card border-secondary" style="width: 100%;">
-                <div class="card-header text-center">links</div>
+              <div class="card border-secondary body_bgd" style="width: 100%;">
+                <div class="card-header text-center header_bgd">links</div>
                 <div class="card-body text-center">
-                  <a href={{ mv.trailer }} class="card-link">trailer</a>
-                  <a href={{ mv.dd_link }} class="card-link">direct download</a>
-                  <a href={{ mv.tlink }} class="card-link">torrent link</a>
+                  <a href={{ mv.trailer }} class="card-link grey_font">trailer</a>
+                  <a href={{ mv.dd_link }} class="card-link grey_font">direct download</a>
+                  <a href={{ mv.tlink }} class="card-link grey_font">torrent link</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="card-footer text-muted text-center">
-        04/09/2020 9:00 pm
+      <div class="card-footer header_bgd text-muted text-center">
+		{{ mv.time }}
+		<button type="button" onmouseover="highlight(this)" onmouseout="dehighlight(this)" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModalCenter" belongsto="card_{{mv.idx}}" ><i class="fa fas fa-trash"></i></button>
       </div>
     </div>
-  </div>
+    </div>
 	{% endfor %}	
-	<form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost();">
+	<form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost();" enctype="multipart/form-data">
+		<input type="hidden" name="action" value="add">
 		<div class="row rounded mb-0" style="margin:auto;">
 			<div class="card border-0 mb-3">
 				<div class="card-header text-center">
@@ -113,7 +112,7 @@
 									<div class="card-header text-center"> Review</div>
 									<div class="card-body">
 										<div class="form-group">
-											<textarea id="H_review" class="form-control" rows="3"></textarea>
+											<textarea name="review" id="H_review" class="form-control" rows="3"></textarea>
 										</div>
 									</div>
 								</div>
@@ -215,4 +214,29 @@
 			</div>
 		</div>
 	</form>
+	<!-- delete movie form -->
+	<form style="display:None;" method="POST" id="DeleteMovieForm">
+		<input type="hidden" id="Delete_MovieId" name="MovieId">
+		<input type="hidden" name="action" value="delete">
+	</form>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<!-- <div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div> -->
+		<div class="modal-body">
+			<h5 class='text-center text-muted' id="modal_text" movie_id="None" >delete movie dark waters</h5> 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="SendDeleteForm()">delete</button>
+		</div>
+	  </div>
+	</div>
+	</div>
 </body>

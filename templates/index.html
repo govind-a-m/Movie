@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Login Template</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body id="gradient" ontouchstart="">
+  <form action="" method="POST" id="loginform"><img class="header-img" src="https://img.icons8.com/windows/96/17ed9f/smile-beam.png" alt="login"/>
+    <h1>Login Page</h1>
+    <label for="username">username:</label>
+    <div class="input-container"><img src="https://img.icons8.com/android/24/953ae5/user.png" alt="user icon" for="username"/>
+      <input id="username" name="username" type="text" placeholder="username"/>
+    </div>
+    <label for="password">password:</label>
+    <div class="input-container"><img src="https://img.icons8.com/ios-filled/50/953ae5/lock.png" alt="password icon" for="password"/>
+      <input id="password" name="password" type="password" placeholder="password"/>
+    </div>
+    <div class="buttons-container">
+      <button id="btn-reset" type="button">reset</button>
+      <button id="btn-login" type="button">login                </button>
+    </div>
+  </form>
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modal-content">
+      <h2 id="modal-message">no content was entered!</h2>
+      <button id="btn-close-modal" type="button">close</button>
+    </div>
+  </div>
+  <div class="welcome-container" id="welcome-container">
+    <section class="welcome" id="welcome">
+      <h1 id="user-welcome">Welcome, User.</h1>
+      <button type="button" id="btn-logout">logout</button>
+    </section>
+  </div>
+</body>
+<script defer="defer" src="app.js"></script>
+<!-- partial -->
+  <script  src="static/script.js"></script>
+
+</body>
+</html>
