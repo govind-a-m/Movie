@@ -2,6 +2,8 @@
 from flask import Flask,render_template,request,session,jsonify
 from Movie import MoviePage,movie
 from AccessDB import DataBase
+from UserMgmt import User
+
 
 app = Flask(__name__)
 app.secret_key = 'szPnSXYHxNkMKDUEE6FbYfCM'
@@ -9,10 +11,23 @@ app.config['UPLOAD_FOLDER'] = r'C:\Users\govin\Documents\Movie\static\posters'
 db = DataBase()
 MoviePage.InitMoviePage(2,db,'MoviePage.html')
 movie.Initmovie(db,app.config,MoviePage)
+User.Init(db)
+
+print(User.GetUserByName('Jonas_Kahnwald'))
+
+User('Jonas_Kahnwald','samayatalme').AddUser()
+
+print(User.GetUserByName('Jonas_Kahnwald'))
 
 @app.route("/",methods=['GET'])
 def login():
   return render_template('index.html')
+
+@app.route("/",methods=['POST'])
+def logpost():
+  print(request.form['username'],request.form['password'])
+  return render_template('index.html')
+
 # def home():
 #   if request.method == 'POST':
 #     if request.form['action']=='add':
@@ -28,5 +43,5 @@ def login():
 
 
 if __name__=="__main__":
-  app.run(host='0.0.0.0')
+  app.run(debug=True)
 

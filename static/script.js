@@ -11,6 +11,7 @@ let modalMessage = document.getElementById('modal-message');
 
 let welcome = document.getElementById('welcome-container');
 let userWelcome = document.getElementById('user-welcome');
+let loginform = document.getElementById('loginform');
 
 
 function inputNull() {
@@ -41,7 +42,13 @@ function loginAccepted() {
 }
 
 function loginPerformed() {
-    
+    if(usernameInput.value.length!=0)
+    {
+        if(passwordInput.value.length!=0)
+        {
+            loginform.submit();
+        }
+    }
 }
 
 loginButton.addEventListener('click', loginPerformed);
