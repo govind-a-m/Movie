@@ -3,7 +3,7 @@ from Movie import movie
 
 class DataBase:
   def __init__(self):
-    self.conn = sqlite3.connect(r'C:\Users\govin\Documents\Movie\MovieData.db',check_same_thread=False)
+    self.conn = sqlite3.connect('MovieData.db',check_same_thread=False)
     self.conn.row_factory = sqlite3.Row
     self.c = self.conn.cursor()
 
@@ -17,8 +17,8 @@ class DataBase:
 
   def AddPost(self,movie):
     self.c.execute('''INSERT INTO posts (idx,time,author,poster,review,tlink,trailer,dd_link,
-                  name,r_doc,r_sci,r_mys,r_thr,r_act,r_phi,r_com,r_min,r_exp)
-                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',movie.Serialize())
+                  name,r_doc,r_sci,r_mys,r_thr,r_act,r_phi,r_com,r_min,r_exp,LikedCount)
+                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''',movie.Serialize())
     self.conn.commit()
 
   def DelPostByName(self,movie_name):
@@ -50,7 +50,7 @@ class DataBase:
     rsp = self.c.fetchone()
     if rsp:
       mv = movie(rsp['author'],rsp['poster'],rsp['review'],
-          rsp['tlink'],rsp['trailer'],rsp['dd_link'],rsp['name'],self.getGenre(rsp),idx=rsp['idx'],time=rsp['time'])
+          rsp['tlink'],rsp['trailer'],rsp['dd_link'],rsp['name'],self.getGenre(rsp),LikedCount=rsp['LikedCount'],idx=rsp['idx'],time=rsp['time'])
       return mv
     else:
       return None
@@ -64,20 +64,40 @@ class DataBase:
     gnrs = {}
     for gnr in movie.genre_list:
       gnrs[gnr] = rsp[gnr]
-      return gnrs
+    return gnrs
 
-  
+  def IncreaseLikeCount(self, mv_name):
+    self.c.execute('UPDATE posts SET LikedCount=LikedCount+1 WHERE name=?',(mv_name,))
+    self.conn.commit()
+
+  def DecreaseLikeCount(self,mv_name):
+    self.c.execute('UPDATE posts SET LikedCount=LikedCount-1 WHERE name=?',(mv_name,))
+    self.conn.commit()
+
+  def QueryLikeCount(self,mv_name):
+    self.c.execute('SELECT LikedCount FROM posts WHERE name=?', (mv_name,))
+    rsp = self.c.fetchone()
+    return rsp['LikedCount']
+
+  # User Table Operations
   def GetUserByName(self,name):
-    self.c.execute('SELECT password FROM users WHERE username=?',(name,))
+    self.c.execute('SELECT * FROM users WHERE username=?',(name,))
     rsp = self.c.fetchone()
     if rsp:
-      return rsp['password']
+      return rsp
     else:
       return None
   
   def AddUser(self,user):
-    print('inside add user')
-    self.c.execute('INSERT INTO users (username,password) VALUES(?,?)',(user.name,user.pwd))
+    self.c.execute('INSERT INTO users (username,password,Liked) VALUES(?,?)',(user.name,user.pwd,user.Liked))
+    self.conn.commit()
+
+  def DelUser(self,name):
+    self.c.execute('DELETE FROM users WHERE username=?',(name,))
+    self.conn.commit()
+
+  def UpdateLiked(self,username,liked_text):
+    self.c.execute('UPDATE users SET Liked=? WHERE username=?',(liked_text,username))
     self.conn.commit()
 
 

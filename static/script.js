@@ -46,7 +46,17 @@ function loginPerformed() {
     {
         if(passwordInput.value.length!=0)
         {
-            loginform.submit();
+            $.ajax({
+			        url: '/ajaxlogin',
+			        data: $('#loginform').serialize(),
+			        type: 'POST',
+			        success: function(response){
+				    OnloginResponse(response);
+			        },
+			        error: function(error){
+                        console.log(error);
+                    }
+			});
         }
     }
 }
@@ -72,3 +82,18 @@ function logoutPerformed() {
 }
 
 logoutButton.addEventListener('click', logoutPerformed);
+
+function OnloginResponse(response){
+    rsp = JSON.parse(response);
+    if(rsp.login=="SUCCESS")
+    {
+        var page = location.href+"Movies/1";
+        console.log(page);
+        location.replace(page);
+    }
+    else
+    {
+        modalMessage.innerHTML = "Wrong Password or user name"
+        modal.style.display = 'block';
+    }
+}

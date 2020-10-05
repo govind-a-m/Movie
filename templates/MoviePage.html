@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/card_test.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type = "text/javascript" src="/static/FormHandler.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script type = "text/javascript" src="/static/FormHandler.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!--	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body id ="body" class="body_bgd" style="width:70%; margin:0% 15%;border-radius: 15px;opacity:0.9">
+<body id ="body" class="body_bgd" onload="QueryUsername()" style="width:70%; margin:0% 15%;border-radius: 15px;opacity:0.9">
 	<div id = "icon" class="card header_bgd text-center border-3 mb-0" style="margin:auto;">
 		<div class="card-body">
 			<button type="button" onclick="AddPost()" class="btn btn-primary"><i class="fa fas fa-plus-square"></i></button>
@@ -21,13 +22,13 @@
     </div>
 	{% for mv in movies %}
 	<div class="row rounded mb-0 body_bgd" id = "{{ mv.idx }}" style="margin:auto;">
-    <div class="card border-0 mb-3 body_bgd" id="card_{{mv.idx}}" movie_name={{ mv.name }} movie_id={{ mv.idx }}>
+    <div class="card border-0 mb-3 body_bgd" id="card_{{mv.idx}}" movie_name="{{ mv.name }}" movie_id={{ mv.idx }}>
       <div class="card-header header_bgd text-center">
         {{ mv.name }} - Posted by {{ mv.author }}
       </div>
       <div class="row no-gutters">
         <div class="col-md-5">
-          <img src= {{ mv.poster }} class="card-img" alt="poster">
+          <img src= {{ mv.poster }} class="card-img" alt="poster" onload="QueryLikeStatus(this)" movie_name="{{ mv.name }}" likebtnid="likebtn_{{mv.idx}}">
         </div>
         <div class="col-md-7">
           <div class="card-body pt-0">
@@ -68,9 +69,9 @@
               <div class="card border-secondary body_bgd" style="width: 100%;">
                 <div class="card-header text-center header_bgd">links</div>
                 <div class="card-body text-center">
-                  <a href={{ mv.trailer }} class="card-link grey_font">trailer</a>
-                  <a href={{ mv.dd_link }} class="card-link grey_font">direct download</a>
-                  <a href={{ mv.tlink }} class="card-link grey_font">torrent link</a>
+                  <a href="{{ mv.trailer }}" class="card-link grey_font">trailer</a>
+                  <a href="{{ mv.dd_link }}" class="card-link grey_font">direct download</a>
+                  <a href="{{ mv.tlink }}" class="card-link grey_font">torrent link</a>
                 </div>
               </div>
             </div>
@@ -78,12 +79,24 @@
         </div>
       </div>
       <div class="card-footer header_bgd text-muted text-center">
-		{{ mv.time }}
-		<button type="button" onmouseover="highlight(this)" onmouseout="dehighlight(this)" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModalCenter" belongsto="card_{{mv.idx}}" ><i class="fa fas fa-trash"></i></button>
+		  <button type="button"  onclick="LikeUnlike(this)"  movie_name="{{ mv.name }}" id="likebtn_{{mv.idx}}" movie_id = "{{ mv.idx }}" class="btn btn-outline-danger btn-sm float-left" ><i class="fa far fa-heart"></i><span id="LikedCountText_{{mv.idx}}">{{ mv.LikedCount}} likes</span></button>
+			{{ mv.time }}
+		  <button type="button" onmouseover="highlight(this)" onmouseout="dehighlight(this)" class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModalCenter" belongsto="card_{{mv.idx}}" ><i class="fa fas fa-trash"></i></button>
       </div>
     </div>
     </div>
-	{% endfor %}	
+	{% endfor %}
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			{% for i in range(movie_page.nav_page_left,movie_page.nav_page_right+1) %}
+				{% if i==movie_page.page_no %}
+					<li class="page-item"><a class="page-link" style="color:#e2e7ee;background-color:#020222;" href=/Movies/{{i}}>{{i}}</a></li>
+				{% else %}
+					<li class="page-item"><a class="page-link"  style="color:#e2e7ee;background-color:#2a2a37;" href=/Movies/{{i}}>{{i}}</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
 	<form style="display:None;" id="HiddenPostForm" method="POST" onsubmit="return SubmitPost();" enctype="multipart/form-data">
 		<input type="hidden" name="action" value="add">
 		<div class="row rounded mb-0" style="margin:auto;">
@@ -94,7 +107,7 @@
 							<input class="form-control" id="H_MovieName" name="MovieName" placeholder="Enter Movie Name">
 						</div>
 						<div class="col-sm-4">
-							<input class="form-control" id="H_UserName" name="UserName" placeholder="Enter User Name">
+							<input class="form-control" id="H_UserName" name="UserName" value="" readonly>
 						</div>
 					</div>
 				</div>
@@ -219,6 +232,11 @@
 		<input type="hidden" id="Delete_MovieId" name="MovieId">
 		<input type="hidden" name="action" value="delete">
 	</form>
+	<!--	like form-->
+	<form id="LikeForm">
+		<input type="hidden" id="LikeInput" name="Like" value="">
+		<input type="hidden" id="MovieLikeInput" name="movie_name" value="">
+	</form>
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -240,3 +258,4 @@
 	</div>
 	</div>
 </body>
+</html>

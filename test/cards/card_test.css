@@ -1,9 +1,14 @@
 html {
-  background: url(collage-copy.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  <!-- background: url(collage-copy.jpg) no-repeat center center fixed;-->
+    background: rgb(64,179,182);
+    background: -moz-linear-gradient(180deg, rgba(64,179,182,1) 0%, rgba(117,104,211,1) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(64,179,182,1) 0%, rgba(117,104,211,1) 100%);
+    background: linear-gradient(180deg, rgba(64,179,182,1) 0%, rgba(117,104,211,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#40b3b6",endColorstr="#7568d3",GradientType=1);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .icon

@@ -9,7 +9,7 @@ class movie:
 	db = None
 	config = None
 	page = None
-	def __init__(self,author,poster,review,tlink,trailer,dd_link,name,genre,idx=None,time=datetime.now().strftime("%d/%m/%Y %H:%M:%S")):
+	def __init__(self,author,poster,review,tlink,trailer,dd_link,name,genre,idx=None,LikedCount=0,time=datetime.now().strftime("%d/%m/%Y %H:%M:%S")):
 		self.idx = idx
 		self.name = name
 		self.author = author
@@ -20,6 +20,7 @@ class movie:
 		self.review = review
 		self.trailer = trailer
 		self.dd_link = dd_link
+		self.LikedCount = LikedCount
 	
 	@classmethod
 	def Initmovie(cls,db,config,page):
@@ -30,29 +31,29 @@ class movie:
 	def NormaliseGenreScore(self):
 		score_sum = 0
 		for _,value in self.genre.items():
-			score_sum = score_sum+value
+			score_sum = score_sum+int(value)
 		for key,value in self.genre.items():
-			self.genre[key] = (value/score_sum)*len(self.genre)*100
+			self.genre[key] = (int(value)/score_sum)*100
 
 	def Serialize(self):
-		print(self.genre,self.genre_list)
-		return ((self.idx,self.time,self.author,self.poster,self.review,self.tlink,self.trailer,self.dd_link,self.name)+
-						tuple((self.genre[genre_name] for genre_name in self.genre_list)))
+		return ((self.idx,self.time,self.author,self.poster,self.review,self.tlink,self.trailer,self.dd_link,self.name) +
+						tuple((self.genre[genre_name] for genre_name in self.genre_list)) + (self.LikedCount,))
 	
 	@classmethod
-	def addMovie(cls,request):
+	def addMovie(cls,request,username):
 		genres = {}
 		cls.Page.ClearCache()
 		form = request.form
 		for genre in cls.genre_list:
 			genres[genre] = form[genre] 
 		poster_name = cls.SaveImage(request.files)
-		mv = cls(form['UserName'],poster_name,form['review'],form['torrent_link'],form['trailer_link'],form['dd_link'],form['MovieName'],genres,idx=cls.db.NofPosts()+1)
+		mv = cls(username,poster_name,form['review'],form['torrent_link'],form['trailer_link'],form['dd_link'],form['MovieName'],genres,idx=cls.db.NofPosts()+1)
+		mv.NormaliseGenreScore()
 		cls.db.AddPost(mv)
 
 	@classmethod
-	def DeleteMovieById(cls,id):
-		idx = int(id)
+	def DeleteMovieById(cls,idx):
+		idx = int(idx)
 		page_no = cls.Page.GetPageId(idx)
 		if page_no:
 			cls.Page.ClearCacheFrom(page_no)
@@ -71,6 +72,10 @@ class movie:
 			print('no poster')
 			return r'/static/posters/blank_poster.jpg'
 
+	@classmethod
+	def QueryLikeCount(cls,movie_name):
+		return cls.db.QueryLikeCount(movie_name)
+
 	def __repr__(self):
 		return '\n'.join(f'{key}:{value}' for key,value in self.__dict__.items())
 
@@ -80,21 +85,24 @@ class MoviePage:
 	db = None
 	template_name = None
 	cache = {}
-	
+
 	def __init__(self,page_no):
 		self.page_no = page_no
 		nofposts = self.db.NofPosts()
 		self.startIdx = nofposts-((page_no-1)*self.ppp)
 		self.EndIdx = 1 if (self.startIdx-self.ppp+1 <=0) else self.startIdx-self.ppp+1
-		self.valid = None
 		self.posts = []
 		self.template = None
-	
+		self.nav_page_left = 1 if (page_no-2<1) else (page_no-2)
+		last_page = nofposts//self.ppp + (1 if nofposts%self.ppp!=0 else 0)
+		self.nav_page_right = last_page if (page_no+2>last_page) else (page_no+2)
+
 	@classmethod
 	def InitMoviePage(cls,posts_per_page,db,template_name):
 		cls.ppp = posts_per_page
 		cls.db = db
 		cls.template_name = template_name
+
 
 	@classmethod
 	def RenderMoviePage(cls,page_no):
@@ -104,7 +112,7 @@ class MoviePage:
 		else:
 			page = cls(page_no)
 			page.Getposts()
-			page.template = render_template(cls.template_name,movies=page.posts)
+			page.template = render_template(cls.template_name,movies=page.posts,movie_page=page)
 			cls.cache[page_no] = page.template
 			return page.template
 	
@@ -136,16 +144,3 @@ class MoviePage:
 		page_no = (m_idx//cls.ppp)+(m_idx%cls.ppp)
 		return page_no
 
-	def isinpage(self,movie_idx):
-		m_idx = selm_idx
-		if (self.startIdx<=movie_idx) and (movie_idx<=self.EndIdx):
-			return True
-		else:
-			return False
-
-
-	
-
-
-
-		

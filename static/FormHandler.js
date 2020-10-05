@@ -1,5 +1,7 @@
 var WarningState = "NONE"
 var form;
+
+
 function AddPost()
 {
     var body = document.getElementById("body")
@@ -114,3 +116,116 @@ function SendDeleteForm()
     document.querySelector("#Delete_MovieId").value = document.querySelector("#modal_text").getAttribute("movie_id");
     document.querySelector("#DeleteMovieForm").submit();
 }
+
+function LikeUnlike(likebtn){
+    var likeInp = document.getElementById("LikeInput");
+    var MovLikeInp = document.getElementById("MovieLikeInput");
+    let movie_id = likebtn.attributes['movie_id'].value;
+    if(likebtn.className=="btn btn-outline-danger btn-sm float-left")
+    {
+        likebtn.className = "btn btn-danger btn-sm float-left";
+        likeInp.value = "like";
+        MovLikeInp.value = likebtn.attributes['movie_name'].value
+        $.ajax({
+                url: '/Likes',
+                data: $('#LikeForm').serialize(),
+                type: 'POST',
+                success: function(response){
+                OnLikeResponse(response,movie_id);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+        });
+    }
+    else
+    {
+        likebtn.className = "btn btn-outline-danger btn-sm float-left";
+        likeInp.value = "unlike";
+        MovLikeInp.value = likebtn.attributes['movie_name'].value;
+        $.ajax({
+                url: '/Likes',
+                data: $('#LikeForm').serialize(),
+                type: 'POST',
+                success: function(response){
+                OnLikeResponse(response,movie_id);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+        });
+    }
+}
+
+function OnLikeResponse(response,movie_id){
+    rsp = JSON.parse(response);
+    liketext_id = "LikedCountText_"+movie_id;
+    if(rsp.OP_STAT=="ADDED_TO_LIKED")
+    {
+       document.getElementById(liketext_id).innerHTML = rsp.LikeCount.toString()+" "+"likes";
+    }
+    else if(rsp.OP_STAT=='REMOVED_FROM_LIKED')
+    {
+        document.getElementById(liketext_id).innerHTML = rsp.LikeCount.toString()+" "+"likes";
+    }
+    else
+    {
+        console.log("invalid operation")
+    }
+}
+
+function QueryLikeStatus(likeimg){
+    console.log(likeimg);
+    var likebtnid = likeimg.attributes['likebtnid'].value;
+    $.ajax({
+                url: '/LikeQuery',
+                data: {"movie_name":likeimg.attributes['movie_name'].value},
+                type: 'POST',
+                success: function(response){
+                onQueryLikeStatus(response,likebtnid);
+
+                },
+                error: function(error){
+                    console.log(error);
+                }
+        });
+}
+
+function onQueryLikeStatus(response,likebtnid){
+    let rsp = JSON.parse(response);
+    let likecounttext_id = likebtnid.replace("likebtn_","LikedCountText_");
+    if(rsp.Liked=='YES')
+    {
+        document.getElementById(likebtnid).className = "btn btn-danger btn-sm float-left";
+        document.getElementById(likecounttext_id).innerHTML = rsp.LikeCount.toString()+" "+"likes";
+    }
+    else if(rsp.Liked=='NO')
+    {
+        document.getElementById(likebtnid).className = "btn btn-outline-danger btn-sm float-left";
+        document.getElementById(likecounttext_id).innerHTML = rsp.LikeCount.toString()+" "+"likes";
+    }
+}
+
+function QueryUsername(){
+        $.ajax({
+                url: '/UsernameQuery',
+                data: {},
+                type: 'GET',
+                success: function(response){
+                onQueryUsername(response);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+        });
+}
+
+
+function onQueryUsername(response){
+    rsp = JSON.parse(response);
+    if(rsp.UserName!='UNKNOWN')
+    {
+        document.getElementById('H_UserName').value = rsp.UserName;
+    }
+}
+
